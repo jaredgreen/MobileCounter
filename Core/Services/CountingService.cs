@@ -8,7 +8,7 @@ public class CountingService : ICountingService
     
     public void Increment()
     {
-        CurrentCount = 1;
+        CurrentCount++;
     }
 
 }

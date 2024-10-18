@@ -11,4 +11,8 @@ public class CountingService : ICountingService
         CurrentCount++;
     }
 
+    public void Reset()
+    {
+        CurrentCount = 0;
+    }
 }

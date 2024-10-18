@@ -36,4 +36,15 @@ public class CountingServiceTests
         
         _countingService.CurrentCount.Should().Be(2);
     }
+
+    [Test]
+    public void GivenIncremented_WhenReset_ThenCurrentCountIsZero()
+    {
+        _countingService.Increment();
+        _countingService.Increment();
+        
+        _countingService.Reset();
+        
+        _countingService.CurrentCount.Should().Be(0);
+    }
 }

@@ -14,8 +14,16 @@ public class CountingServiceTests
     }
 
     [Test]
-    public void WhenCreated_CurrentCount_ReturnsZero()
+    public void WhenCreated_CurrentCountIsZero()
     {
         _countingService.CurrentCount.Should().Be(0);
+    }
+
+    [Test]
+    public void WhenIncrement_ThenCurrentCountIsOne()
+    {
+        _countingService.Increment();
+        
+        _countingService.CurrentCount.Should().Be(1);
     }
 }

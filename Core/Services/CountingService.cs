@@ -4,11 +4,11 @@ namespace Core.Services;
 
 public class CountingService : ICountingService
 {
-    public int CurrentCount { get; } = default;
+    public int CurrentCount { get; private set; } = default;
     
     public void Increment()
     {
-        throw new NotImplementedException();
+        CurrentCount = 1;
     }
 
 }

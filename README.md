@@ -10,11 +10,9 @@ products:
 urlFragment: uitest-appium-nunit
 ---
 
-# .NET MAUI UI testing with Appium and NUnit
+# Mobile Counter App
 
-This project serves as a bare bones project structure that can be used as an example on how to get started with UI tests using Appium and .NET Multi-platform App UI (.NET MAUI).
-
-As a test framework [NUnit](https://nunit.org/) has been chosen for this example. The tests are run through Appium. This code uses the release candidate of the Appium v5 NuGet. During development this has proven to be very stable and the code has become significantly cleaner.
+This project serves as an example .NET Maui application. Highlighting various layers of automated testing.
 
 ## Project Structure
 
@@ -28,25 +26,6 @@ Below you will find an overview of all the projects found in this solution and a
 
 * UITests.Android: contains code to bootstrap the UI tests for running on Android as well as Android-specific tests.
 * UITests.iOS: contains code to bootstrap the UI tests for running on iOS as well as iOS-specific tests.
-* UITests.macOS: contains code to bootstrap the UI tests for running on macOS as well as macOS-specific tests.
-* UITests.Windows: contains code to bootstrap the UI tests for running on Windows as well as Windows-specific tests.
-
-If you do not need a certain platform, you can safely remove one or more of the platform-specific projects according to your needs.
-
-Each of the platform-specific projects contains a `AppiumSetup.cs` file. This file contains the details for each platform and configures the values accordingly. Each class contains inline comments to describe what they are.
-
-> [!IMPORTANT]
-> You must change the unique app identifier to your own. This can be either the path to the app executable or the app unique identifier  (for example: com.mycompany.myapp).
-
-### Code share considerations
-
-While .NET MAUI by default uses the single-project approach, this is not always desired for UI testing. Therefore, there is a project for each platform you want to target. However, the tests run most smoothly if they are bundled into one assembly.
-
-To make this possible we are using a so-called [NoTargets project](https://github.com/microsoft/MSBuildSdks/blob/main/src/NoTargets/). This type of project produces no assembly of its own. Instead, it acts as a collection of files that are easily accessible from within Visual Studio, including adding, removing and editing capabilities.
-
-In each of the platform-specific projects, there are (invisible) links to the files of this project and these are compiled together with the platform-specific tests. There is no project reference between the shared project and the platform projects. The link is created through the .csproj file for each of the platform projects. This way, all the code ends up in one assembly making it easier to run the UI tests.
-
-Typically, you should not notice any of this or have to worry about it.
 
 ## Getting started
 
@@ -77,11 +56,6 @@ The NUnit framework is used in this solution, so writing tests will use all the 
 ```csharp
 public class MainPageTests : BaseTest
 {
-    [Test]
-    public void AppLaunches()
-    {
-        App.GetScreenshot().SaveAsFile($"{nameof(AppLaunches)}.png");
-    }
 
     [Test]
     public void ClickCounterTest()
@@ -92,10 +66,8 @@ public class MainPageTests : BaseTest
 
         // Act
         element.Click();
-        Task.Delay(500).Wait(); // Wait for the click to register and show up on the screenshot
 
         // Assert
-        App.GetScreenshot().SaveAsFile($"{nameof(ClickCounterTest)}.png");
         Assert.That(element.Text, Is.EqualTo("Clicked 1 time"));
     }
 }

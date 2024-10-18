@@ -31,6 +31,7 @@ public class CountingServiceTests
     public void GivenIncrementedOnce_WhenIncrement_ThenCurrentCountIsTwo()
     {
         _countingService.Increment();
+        
         _countingService.Increment();
         
         _countingService.CurrentCount.Should().Be(2);

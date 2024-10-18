@@ -4,7 +4,7 @@ namespace Core.Services;
 
 public class CountingService : ICountingService
 {
-    public int CurrentCount { get; private set; } = default;
+    public int CurrentCount { get; private set; }
     
     public void Increment()
     {

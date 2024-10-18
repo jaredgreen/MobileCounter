@@ -22,6 +22,8 @@ public class MainPageViewModelTests
     {
         _vm.ClickedText.Should().Be("Click Me");
     }
+    
+    #region IncrementCommandTests
 
     [Test]
     public void WhenIncrementToOne_ClickedTextShouldBeClickedOneTime()
@@ -34,7 +36,7 @@ public class MainPageViewModelTests
     }
 
     [Test]
-    public void WhenIncrementToTwo_ClickedTextShouldBeClickedOneTime()
+    public void WhenIncrementToTwo_ClickedTextShouldBeClickedTwoTimes()
     {
         _countingService.CurrentCount.Returns(2);
         
@@ -50,4 +52,29 @@ public class MainPageViewModelTests
         
         _countingService.Received().Increment();
     }
+    
+    #endregion IncrementCommandTests
+
+    #region ResetCommandTests
+    
+    [Test]
+    public void WhenResetCommandExecuted_ClickedTextShouldBeClickMe()
+    {
+        _vm.ClickedText = "Clicked 1 time";
+        
+        _vm.ResetCommand.Execute(null);
+        
+        _vm.ClickedText.Should().Be("Click Me");
+    }
+
+    [Test]
+    public void WhenResetCommandExecuted_ShouldResetCountingService()
+    {
+        _vm.ResetCommand.Execute(null);
+        
+        _countingService.Received().Reset();
+    }
+    
+
+    #endregion ResetCommandTests
 }

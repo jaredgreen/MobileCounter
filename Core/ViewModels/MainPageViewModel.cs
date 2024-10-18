@@ -28,4 +28,12 @@ public partial class MainPageViewModel : ObservableObject
         else
             ClickedText = $"Clicked {currentCount} times";
     }
+
+    [RelayCommand]
+    private void Reset()
+    {
+        _countingService.Reset();
+        
+        ClickedText = "Click Me";
+    }
 }

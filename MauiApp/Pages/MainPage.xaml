@@ -1,14 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:Core.ViewModels;assembly=Core"
              x:DataType="viewModels:MainPageViewModel"
-             x:Class="MobileCounter.MainPage">
+             x:Class="MobileCounter.Pages.MainPage">
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+            Spacing="25"
+            Padding="30,0">
+
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
@@ -16,12 +18,18 @@
                 SemanticProperties.Description="dot net bot in a race car number eight" />
 
             <Button
-                x:Name="CounterBtn"
                 AutomationId="CounterBtn"
-                Text="{Binding ClickedText}" 
+                Text="{Binding ClickedCount}" 
                 Command="{Binding IncrementCommand}"
-                SemanticProperties.Hint="Counts the number of times you click"
                 HorizontalOptions="Fill" />
+            
+            <Button
+                AutomationId="ResetBtn"
+                Text="Reset"
+                Command="{Binding ResetCommand}"
+                VerticalOptions="End"
+                HorizontalOptions="Fill" />
+
         </VerticalStackLayout>
     </ScrollView>
 

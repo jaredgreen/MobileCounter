@@ -2,9 +2,8 @@
 
 namespace UITests;
 
-public class MainPageTests : BaseTest
+public class ClickCounterFeature : BaseTest
 {
-	
 	[SetUp]
 	public void Setup()
 	{
@@ -20,30 +19,29 @@ public class MainPageTests : BaseTest
 	[Test]
 	public void WhenLoaded_ThenShowsClickMe()
 	{
-		var element = FindUIElement("CounterBtn");
+		var button = FindUIElement("CounterBtn");
 
-		Assert.That(element.Text, Is.EqualTo("Click me"));
+		Assert.That(button.Text, Is.EqualTo("Click Me"));
 	}
 
 	[Test]
 	public void WhenClicked_ThenShowsClickedOneTime()
 	{
-		var element = FindUIElement("CounterBtn");
+		var button = FindUIElement("CounterBtn");
 	
-		element.Click();
+		button.Click();
 	
-		Assert.That(element.Text, Is.EqualTo("Clicked 1 time"));
+		Assert.That(button.Text, Is.EqualTo("Clicked 1 time"));
 	}
 	
 	[Test]
 	public void GivenClickedOnce_WhenClickAgain_ThenShowsClickedTwoTimes()
 	{
-		var element = FindUIElement("CounterBtn");
+		var button = FindUIElement("CounterBtn");
 	
-		element.Click();
-		element.Click();
-		// Task.Delay(500).Wait();
+		button.Click();
+		button.Click();
 	
-		Assert.That(element.Text, Is.EqualTo("Clicked 2 times"));
+		Assert.That(button.Text, Is.EqualTo("Clicked 2 times"));
 	}
 }

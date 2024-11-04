@@ -11,33 +11,34 @@ public class MainPageViewModelIntegrationTests
     [SetUp]
     public void Setup()
     {
+        //Testing the integration between MainPageViewModel and CountingService
         var countingService = new CountingService();
         _vm = new MainPageViewModel(countingService);
     }
 
     [Test]
-    public void WhenCreated_ClickedTextShouldBeClickMe()
+    public void WhenCreated_ClickedCountShouldBeClickMe()
     {
-        _vm.ClickedText.Should().Be("Click Me");
+        _vm.ClickedCount.Should().Be("Click Me");
     }
     
     #region IncrementCommandTests
 
     [Test]
-    public void WhenIncrementToOne_ClickedTextShouldBeClickedOneTime()
+    public void WhenIncrementToOne_ClickedCountShouldBeClickedOneTime()
     {
         _vm.IncrementCommand.Execute(null);
         
-        _vm.ClickedText.Should().Be("Clicked 1 time");
+        _vm.ClickedCount.Should().Be("Clicked 1 time");
     }
 
     [Test]
-    public void WhenIncrementToTwo_ClickedTextShouldBeClickedOneTime()
+    public void WhenIncrementToTwo_ClickedCountShouldBeClickedOneTime()
     {
         _vm.IncrementCommand.Execute(null);
         _vm.IncrementCommand.Execute(null);
         
-        _vm.ClickedText.Should().Be("Clicked 2 times");
+        _vm.ClickedCount.Should().Be("Clicked 2 times");
     }
     
     #endregion IncrementCommandTests
@@ -45,14 +46,14 @@ public class MainPageViewModelIntegrationTests
     #region ResetCommandTests
 
     [Test]
-    public void GivenIncremented_WhenReset_ClickedTextShouldBeClickMe()
+    public void GivenIncremented_WhenReset_ClickedCountShouldBeClickMe()
     {
         _vm.IncrementCommand.Execute(null);
         _vm.IncrementCommand.Execute(null);
         
         _vm.ResetCommand.Execute(null);
         
-        _vm.ClickedText.Should().Be("Click Me");
+        _vm.ClickedCount.Should().Be("Click Me");
     }
     
     #endregion ResetCommandTests

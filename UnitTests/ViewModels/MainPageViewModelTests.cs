@@ -17,33 +17,34 @@ public class MainPageViewModelTests
         _vm = new MainPageViewModel(_countingService);
     }
 
+    #region ClickedText
+    
     [Test]
     public void WhenCreated_ClickedTextShouldBeClickMe()
     {
-        _vm.ClickedText.Should().Be("Click Me");
+        _vm.ClickedCount.Should().Be("Click Me");
     }
     
-    #region IncrementCommandTests
-
     [Test]
-    public void WhenIncrementToOne_ClickedTextShouldBeClickedOneTime()
+    public void GivenCurrentCountIsOne_ClickedTextShouldBeClickedOneTime()
     {
         _countingService.CurrentCount.Returns(1);
         
-        _vm.IncrementCommand.Execute(null);
-        
-        _vm.ClickedText.Should().Be("Clicked 1 time");
+        _vm.ClickedCount.Should().Be("Clicked 1 time");
     }
-
+    
     [Test]
-    public void WhenIncrementToTwo_ClickedTextShouldBeClickedTwoTimes()
+    public void GivenCurrentCountIsTwo_ClickedTextShouldBeClickedTwoTimes()
     {
         _countingService.CurrentCount.Returns(2);
         
-        _vm.IncrementCommand.Execute(null);
-        
-        _vm.ClickedText.Should().Be("Clicked 2 times");
+        _vm.ClickedCount.Should().Be("Clicked 2 times");
     }
+    
+    #endregion ClickedText
+    
+    #region IncrementCommandTests
+
 
     [Test]
     public void WhenIncrementCommandExecuted_ShouldIncrementCountingService()
@@ -52,20 +53,27 @@ public class MainPageViewModelTests
         
         _countingService.Received().Increment();
     }
+
+    [Test]
+    public void WhenIncrementCommandIsExecuted_ShouldNotifyPropertyChangedForClickedText()
+    {
+        var isFired = false;
+        _vm.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(_vm.ClickedCount))
+            {
+                isFired = true;
+            }
+        };
+        
+        _vm.IncrementCommand.Execute(null);
+
+        isFired.Should().BeTrue();
+    }
     
     #endregion IncrementCommandTests
 
     #region ResetCommandTests
-    
-    [Test]
-    public void WhenResetCommandExecuted_ClickedTextShouldBeClickMe()
-    {
-        _vm.ClickedText = "Clicked 1 time";
-        
-        _vm.ResetCommand.Execute(null);
-        
-        _vm.ClickedText.Should().Be("Click Me");
-    }
 
     [Test]
     public void WhenResetCommandExecuted_ShouldResetCountingService()
@@ -73,6 +81,23 @@ public class MainPageViewModelTests
         _vm.ResetCommand.Execute(null);
         
         _countingService.Received().Reset();
+    }
+
+    [Test]
+    public void WhenResetCommandIsExecuted_ShouldNotifyPropertyChangedForClickedText()
+    {
+        var isFired = false;
+        _vm.PropertyChanged += (_, e) =>
+        {
+            if (e.PropertyName == nameof(_vm.ClickedCount))
+            {
+                isFired = true;
+            }
+        };
+        
+        _vm.ResetCommand.Execute(null);
+
+        isFired.Should().BeTrue();
     }
     
 

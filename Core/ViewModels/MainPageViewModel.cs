@@ -8,9 +8,24 @@ public partial class MainPageViewModel : ObservableObject
 {
     private readonly ICountingService _countingService;
 
-    [ObservableProperty] 
-    private string _clickedText = "Click Me";
-    
+    public string ClickedCount
+    {
+        get
+        {
+            var currentCount = _countingService.CurrentCount;
+
+            if (currentCount == 0)
+            {
+                return "Click Me";
+            }
+            if (currentCount == 1)
+            {
+                return $"Clicked {currentCount} time";
+            }
+            return $"Clicked {currentCount} times";
+        }
+    }
+
     public MainPageViewModel(ICountingService countingService)
     {
         _countingService = countingService;
@@ -20,20 +35,13 @@ public partial class MainPageViewModel : ObservableObject
     private void Increment()
     {
         _countingService.Increment();
-
-        var currentCount = _countingService.CurrentCount;
-        
-        if (currentCount == 1)
-            ClickedText = $"Clicked {currentCount} time";
-        else
-            ClickedText = $"Clicked {currentCount} times";
+        OnPropertyChanged(nameof(ClickedCount));
     }
 
     [RelayCommand]
     private void Reset()
     {
         _countingService.Reset();
-        
-        ClickedText = "Click Me";
+        OnPropertyChanged(nameof(ClickedCount));
     }
 }

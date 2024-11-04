@@ -1,6 +1,8 @@
 ﻿using Core.Interfaces;
 using Core.Services;
 using Core.ViewModels;
+using MobileCounter.Pages;
+using MobileCounter.Views;
 
 namespace MobileCounter;
 
@@ -30,6 +32,8 @@ public static class MauiProgram
 	private static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
 	{
 		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<FizzBuzzPage>();
+		builder.Services.AddTransient<CardLabel>();
 
 		return builder;
 	}
@@ -37,13 +41,15 @@ public static class MauiProgram
     private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<MainPageViewModel>();
+        builder.Services.AddTransient<FizzBuzzPageViewModel>();
         
         return builder; 
     }
 
     private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
     {
-        builder.Services.AddTransient<ICountingService, CountingService>();
+        builder.Services.AddSingleton<ICountingService, CountingService>();
+        builder.Services.AddSingleton<IFizzBuzzCalculator, FizzBuzzCalculator>();
         
         return builder;
     }

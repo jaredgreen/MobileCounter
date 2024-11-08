@@ -6,7 +6,7 @@
              x:Class="MobileCounter.Views.CardLabel"
              x:DataType="views:CardLabel"
              x:Name="this">
-    <Frame>
+    <Frame BackgroundColor="DimGray">
         <VerticalStackLayout>
             <Label VerticalOptions="Center"
                    HorizontalOptions="Center"

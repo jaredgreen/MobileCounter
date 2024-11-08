@@ -38,13 +38,6 @@ public class AppiumSetup
 		driver = new IOSDriver(iOSOptions);
 	}
 
-	// [SetUp]
-	// public void SetUp()
-	// {
-	// 	driver.TerminateApp("com.uplift.mobilecounter");
-	// 	driver.ActivateApp("com.uplift.mobilecounter");
-	// }
-
 	[OneTimeTearDown]
 	public void RunAfterAnyTests()
 	{

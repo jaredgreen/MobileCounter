@@ -7,13 +7,13 @@ public class ClickCounterFeature : BaseTest
 	[SetUp]
 	public void Setup()
 	{
-		App.ActivateApp("com.uplift.mobilecounter");
+		OpenApp();
 	}
 
 	[TearDown]
 	public void After()
 	{
-		App.TerminateApp("com.uplift.mobilecounter");
+		CloseApp();
 	}
 
 	[Test]

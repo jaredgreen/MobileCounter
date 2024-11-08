@@ -25,5 +25,15 @@ public abstract class BaseTest
 		goToFizzBuzz.Click();
 		Task.Delay(1000).Wait();
 	}
+
+	protected static void OpenApp()
+	{
+		App.ActivateApp("com.uplift.mobilecounter");
+	}
+
+	protected static void CloseApp()
+	{
+		App.TerminateApp("com.uplift.mobilecounter");
+	}
 	
 }
